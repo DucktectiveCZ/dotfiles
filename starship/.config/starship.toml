@@ -93,8 +93,8 @@ symbol = ' '
 
 [character]
 format = " $symbol "
-success_symbol = "[󰇥](bold italic bright-blue)"
-error_symbol = "[󰇥](italic purple)"
+success_symbol = "[󰇥](bold italic bright-red)"
+error_symbol = "[󰇥](italic red)"
 vimcmd_symbol = "[󰇥](italic dimmed green)"
 # not supported in zsh
 vimcmd_replace_one_symbol = "◌"
@@ -124,10 +124,10 @@ truncation_length = 2
 truncation_symbol = "□ "
 read_only = " ◈"
 use_os_path_sep = true
-style = "italic blue"
+style = "italic red"
 format = '[$path]($style)[$read_only]($read_only_style)'
-repo_root_style = 'bold blue'
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-blue)'
+repo_root_style = 'bold magenta'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [△](bold bright-red)'
 
 [cmd_duration]
 format = "[◄ $duration ](italic white)"
@@ -135,7 +135,7 @@ format = "[◄ $duration ](italic white)"
 [jobs]
 format = "[$symbol$number]($style) "
 style = "white"
-symbol = "[▶](blue italic)"
+symbol = "[▶](red italic)"
 
 [localip]
 ssh_only = true
@@ -171,8 +171,8 @@ style = "italic dimmed yellow"
 
 [git_branch]
 format = " [$branch(:$remote_branch)]($style)"
-symbol = "[△](bold italic bright-blue)"
-style = "italic bright-blue"
+symbol = "[△](bold italic bright-red)"
+style = "italic bright-red"
 truncation_symbol = "⋯"
 truncation_length = 11
 ignore_branches = ["main", "master"]
@@ -186,7 +186,7 @@ ignore_submodules = true
 disabled = false
 
 [git_status]
-style = "bold italic bright-blue"
+style = "bold italic bright-red"
 format = "([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))"
 conflicted = "[◪◦](italic bright-magenta)"
 ahead = "[▴│[${count}](bold white)│](italic green)"
@@ -196,7 +196,7 @@ untracked = "[◌◦](italic bright-yellow)"
 stashed = "[◃◈](italic white)"
 modified = "[●◦](italic yellow)"
 staged = "[▪┤[$count](bold white)│](italic bright-cyan)"
-renamed = "[◎◦](italic bright-blue)"
+renamed = "[◎◦](italic bright-red)"
 deleted = "[✕](italic red)"
 
 [deno]
@@ -218,7 +218,7 @@ detect_extensions = []
 
 [python]
 format = " [py](italic) [${symbol}${version}]($style)"
-symbol = "[⌉](bold bright-blue)⌊ "
+symbol = "[⌉](bold bright-yellow)⌊ "
 version_format = "${raw}"
 style = "bold bright-yellow"
 

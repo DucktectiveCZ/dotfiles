@@ -1,0 +1,72 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+;     (workspaces)
+    (leftstuff)
+    (music)
+    (sidestuff)))
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    time))
+
+(defwidget leftstuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "start"
+    (metric :value volume
+            :onchange "amixer -D pulse sset Master {}%")))
+
+; (defwidget workspaces []
+;   (box :class "workspaces"
+;        :orientation "h"
+;        :space-evenly true
+;        :halign "start"
+;        :spacing 10
+;     (button :onclick "hyprctl dispatch workspace 0" 1)
+;     (button :onclick "hyprctl dispatch workspace 1" 2)
+;     (button :onclick "hyprctl dispatch workspace 2" 3)
+;     (button :onclick "hyprctl dispatch workspace 3" 4)
+;     (button :onclick "hyprctl dispatch workspace 4" 5)
+;     (button :onclick "hyprctl dispatch workspace 5" 6)
+;     (button :onclick "hyprctl dispatch workspace 6" 7)
+;     (button :onclick "hyprctl dispatch workspace 7" 8)
+;     (button :onclick "hyprctl dispatch workspace 8" 9)))
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    music))
+
+
+(defwidget metric [?label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol.sh")
+
+(defpoll time :interval "5s"
+  "date '+%H:%M %-m.%d '")
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "98.75%"
+                      :height "10px"
+                      :anchor "top center")
+  :exclusive true
+  (bar))

@@ -119,6 +119,8 @@ eval "$(starship init zsh)"
 alias cd='z'
 alias ls='lsd'
 alias x='exit'
+alias mkdir='mkdir -p'
+# alias cp='rsync -ah --progress'
 
 ~/.fetch.sh
 

@@ -1,9 +1,8 @@
 #!/bin/sh
 #
-# ufetch-arch - tiny system info for arch
+# ufetch-arch - tiny system info for Arch Linux
 
 ## INFO
-
 host="$(cat /etc/hostname)"
 os='Arch Linux'
 kernel="$(uname -sr)"
@@ -12,26 +11,14 @@ packages="$(pacman -Q | wc -l)"
 shell="$(basename "${SHELL}")"
 
 ## DEFINE COLORS
+pink="\033[38;2;235;111;146m"  # #eb6f92
+bold="\033[1m"
+reset="\033[0m"
 
-# probably don't change these
-if [ -x "$(command -v tput)" ]; then
-	bold="$(tput bold 2> /dev/null)"
-	black="$(tput setaf 0 2> /dev/null)"
-	red="$(tput setaf 1 2> /dev/null)"
-	green="$(tput setaf 2 2> /dev/null)"
-	yellow="$(tput setaf 3 2> /dev/null)"
-	blue="$(tput setaf 4 2> /dev/null)"
-	magenta="$(tput setaf 5 2> /dev/null)"
-	cyan="$(tput setaf 6 2> /dev/null)"
-	white="$(tput setaf 7 2> /dev/null)"
-	reset="$(tput sgr0 2> /dev/null)"
-fi
-
-# you can change these
-lc="${reset}${bold}${blue}"         # labels
-nc="${reset}${bold}${blue}"         # user and hostname
-ic="${reset}"                       # info
-c0="${reset}${blue}"                # first color
+lc="${bold}${pink}"  # labels
+nc="${bold}${pink}"  # user/host
+ic="${reset}"        # info
+c0="${pink}"         # ASCII art
 
 center() {
     local s="$1"
@@ -41,30 +28,32 @@ center() {
     printf "%*s%s%*s\n" "$pad" "" "$s" "$((w - len - pad))" ""
 }
 
+## ASCII ART
+ascii="${c0}
+                     MMMMMM
+                   MM      MM
+                 MM          MM
+                 MM      MM  MM
+                 MM        ====MM
+                   MM      MMMM
+     MM              MM  MM
+   MM  MM        MMMM    MM
+   MM    MMMMMMMM          MM
+   MM                        MM
+     MM              MM      MM
+     MM    MM      MM        MM
+       MM    MMMMMMMM      MM
+       MM                  MM
+         MMMM          MMMM
+             MMMMMMMMMM
+"
+
 ## OUTPUT
-
-cat <<EOF
-${c0}
-${c0}                     MMMMMM
-${c0}                   MM      MM
-${c0}                 MM          MM
-${c0}                 MM      MM  MM
-${c0}                 MM        ====MM
-${c0}                   MM      MMMM
-${c0}     MM              MM  MM
-${c0}   MM  MM        MMMM    MM
-${c0}   MM    MMMMMMMM          MM
-${c0}   MM                        MM
-${c0}     MM              MM      MM
-${c0}     MM    MM      MM        MM
-${c0}       MM    MMMMMMMM      MM
-${c0}       MM                  MM
-${c0}         MMMM          MMMM
-${c0}             MMMMMMMMMM
- 
-        ${lc}host  ${ic}${host}${reset}
-        ${lc}  os  ${ic}${os}${reset}
-        ${lc}user  ${ic}${USER}${reset}
-
-EOF
-
+echo -e "$ascii"
+echo -e "        ${lc}host  ${ic}${host}${reset}"
+echo -e "        ${lc}  os  ${ic}${os}${reset}"
+echo -e "        ${lc}user  ${ic}${USER}${reset}"
+# echo -e "        ${lc}kernel${ic}${kernel}${reset}"
+# echo -e "        ${lc}uptime${ic}${uptime}${reset}"
+# echo -e "        ${lc}shell ${ic}${shell}${reset}"
+# echo -e "        ${lc}pkgs  ${ic}${packages}${reset}"
